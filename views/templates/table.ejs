@@ -1,0 +1,78 @@
+<script language="javascript">
+    function doSearch() {
+        var tableReg = document.getElementById('regTable');
+        var searchText = document.getElementById('searchTerm').value.toLowerCase();
+        for (var i = 1; i < tableReg.rows.length; i++) {
+            var cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+            var found = false;
+            for (var j = 0; j < cellsOfRow.length && !found; j++) {
+                var compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+                if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1)) {
+                    found = true;
+                }
+            }
+            if (found) {
+                tableReg.rows[i].style.display = '';
+            } else {
+                tableReg.rows[i].style.display = 'none';
+            }
+        }
+    }
+</script>
+
+<div class="row">
+    <div class="col">
+        <img src="https://previews.123rf.com/images/jemastock/jemastock1705/jemastock170508081/78181551-dise%C3%B1o-del-ejemplo-del-vector-de-la-imagen-del-icono-de-la-gu%C3%ADa-telef%C3%B3nica.jpg"
+            class="rounded mx-auto d-block" alt="phone" width="200">
+    </div>
+    <div class="col">
+        <h3>Buscar</h3>
+        <input id="searchTerm" type="text" onkeyup="doSearch()" class="input-group mb-3" />
+    </div>
+</div>
+
+<%if(data.length){%>
+    <table class="table" id="regTable">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i=0; i < data.length; i++) { %>
+                <tr>
+                    <td scope="row">
+                        <%= (i+1) %>
+                    </td>
+                    <td>
+                        <%= data[i].firstName %>
+                    </td>
+                    <td>
+                        <%= data[i].lastName %>
+                    </td>
+                    <td>
+                        <%= data[i].number %>
+                    </td>
+                    <td>
+                        <a href=<%='/edit/' +data[i].uid %> class="btn btn-outline-primary"><i
+                                class='bx bxs-edit'></i></a>
+                        <a href=<%='/delete/' +data[i].uid %> class="btn btn-outline-danger"><i
+                                class='bx bxs-trash'></i></a>
+                    </td>
+
+                </tr>
+                <% } %>
+
+        </tbody>
+    </table>
+
+    <%}else{%>
+        <div class="alert alert-primary" role="alert">
+            Sin contactos
+        </div>
+
+        <%}%>

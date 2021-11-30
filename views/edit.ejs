@@ -1,0 +1,28 @@
+<%- include('./templates/head.ejs'); %>
+    <%- include('./templates/nav.ejs'); %>
+
+        <div class="container mt-5 ">
+            <div class="mb-3">
+                <span class="text-muted ">Actualizar Contacto</span>
+            </div>
+            <form method="post" action=<%=`/updated/${uid}` %>>
+                <div class="mb-3">
+                    <label class="form-label">Telefono</label>
+                    <input type="text" class="form-control" name="number" id="telefono" aria-describedby="emailHelp"
+                        value='<%= number %>''>
+                    <div  class="form-text">ingrese solo numeros</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                    <input type="text" name="firstName" class="form-control" id="nombres"
+                        value='<%= firstName %>''>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                    <input type="text" name="lastName" class="form-control" id="apellidos"
+                        value='<%= lastName %>' >
+                </div>
+
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
